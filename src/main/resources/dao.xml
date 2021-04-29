@@ -7,14 +7,25 @@
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="dao" class="kr.co.fastcampus.cli.Dao" factory-bean="daoFactory" factory-method="createDao"/>
-    <bean id="daoFactory" class="kr.co.fastcampus.cli.DaoFactory" />
-    <bean id="A" class="kr.co.fastcampus.cli.A" >
-        <constructor-arg ref="B"></constructor-arg>
+    <bean id="dao" class="kr.co.fastcampus.cli.Dao">
+        <constructor-arg ref="connection"></constructor-arg>
+    </bean>
+<!--    <bean id="daoFactory" class="kr.co.fastcampus.cli.DaoFactory" />-->
+<!--    <bean id="A" class="kr.co.fastcampus.cli.A" >-->
+<!--        <constructor-arg ref="B"></constructor-arg>-->
+<!--    </bean>-->
+
+<!--    <bean id="B" class="kr.co.fastcampus.cli.B">-->
+<!--        <constructor-arg value="true"></constructor-arg>-->
+<!--    </bean>-->
+
+    <bean id="connection" class="java.sql.Connection" factory-method="createConnection" factory-bean="connectionFactory"/>
+
+    <bean id="connectionFactory" class="kr.co.fastcampus.cli.ConnectionFactory">
+        <constructor-arg name="url" value="jdbc:h2:mem:test;MODE=MySQL" />
+        <constructor-arg name="user" value="sa" />
+        <constructor-arg name="password" value="" />
     </bean>
 
-    <bean id="B" class="kr.co.fastcampus.cli.B">
-        <constructor-arg value="true"></constructor-arg>
-    </bean>
 </beans>
 

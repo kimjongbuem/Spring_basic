@@ -10,13 +10,18 @@ import java.sql.SQLException;
 @Slf4j
 public class Dao {
 
+    private Connection connection;
+    public Dao(Connection connection){
+        this.connection = connection;
+    }
+
     public void run() throws SQLException {
 
         try {
             Class.forName("org.h2.Driver");
             String url="jdbc:h2:mem:test;MODE=MySQL";
 
-            try(var connection = DriverManager.getConnection(url, "sa", ""); var statement = connection.createStatement()){
+            try(var statement = connection.createStatement()){
                 connection.setAutoCommit(false);
                 statement.execute("create table member(id int auto_increment, username varchar(255) not null, password varchar(255) not null, primary key(id))");
                 try {
