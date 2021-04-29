@@ -9,5 +9,12 @@
 
     <bean id="dao" class="kr.co.fastcampus.cli.Dao" factory-bean="daoFactory" factory-method="createDao"/>
     <bean id="daoFactory" class="kr.co.fastcampus.cli.DaoFactory" />
+    <bean id="A" class="kr.co.fastcampus.cli.A" >
+        <constructor-arg ref="B"></constructor-arg>
+    </bean>
+
+    <bean id="B" class="kr.co.fastcampus.cli.B">
+        <constructor-arg value="true"></constructor-arg>
+    </bean>
 </beans>
 
