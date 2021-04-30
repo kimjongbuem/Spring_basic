@@ -12,7 +12,11 @@ import java.sql.SQLException;
 class Main {
 	public static void main(String[] args) throws SQLException {
 		log.info("Hello world!!");
-		ApplicationContext context = new ClassPathXmlApplicationContext("dao.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("dao.xml" );
+//		C a2 = context.getBean("C", C.class);
+//		C a1 = context.getBean("C", C.class);
+//		log.info("result = " + (a1 == a2));
+
 		Dao dao = context.getBean("dao", Dao.class);
 		dao.run();
 

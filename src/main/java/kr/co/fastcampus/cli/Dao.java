@@ -17,29 +17,22 @@ public class Dao {
 
     public void run() throws SQLException {
 
-        try {
-            Class.forName("org.h2.Driver");
-            String url="jdbc:h2:mem:test;MODE=MySQL";
-
-            try(var statement = connection.createStatement()){
-                connection.setAutoCommit(false);
-                statement.execute("create table member(id int auto_increment, username varchar(255) not null, password varchar(255) not null, primary key(id))");
-                try {
-                    statement.executeUpdate("insert into member(username, password) values('boojongmin', '1234')");
-                    connection.commit();
-                } catch (SQLException e) {
-                    connection.rollback();
-                }
-
-                var resultSet = statement.executeQuery("select id, username, password from member");
-                while(resultSet.next()) {
-//				var member = new Member(resultSet);
-                    var member = new Member("boojongmin", "1234");
-                    log.info(member.toString());
-                }
+        try (var statement = connection.createStatement()) {
+            connection.setAutoCommit(false);
+            statement.execute("create table member(id int auto_increment, username varchar(255) not null, password varchar(255) not null, primary key(id))");
+            try {
+                statement.executeUpdate("insert into member(username, password) values('boojongmin', '1234')");
+                connection.commit();
+            } catch (SQLException e) {
+                connection.rollback();
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+
+            var resultSet = statement.executeQuery("select id, username, password from member");
+            while (resultSet.next()) {
+//				var member = new Member(resultSet);
+                var member = new Member("boojongmin", "1234");
+                log.info(member.toString());
+            }
         }
     }
 }
