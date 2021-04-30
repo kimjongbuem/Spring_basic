@@ -14,16 +14,17 @@ import java.sql.SQLException;
 @Slf4j
 class Main {
 	public static void main(String[] args) throws SQLException {
-		log.info("Hello world!!");
-		ApplicationContext context = new ClassPathXmlApplicationContext("dao.xml" );
+
+		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("dao.xml" );
+		context.close();
 //		C a2 = context.getBean("C", C.class);
 //		C a1 = context.getBean("C", C.class);
 //		log.info("result = " + (a1 == a2));
 
-		ConnectionFactory factory = context.getBean(ConnectionFactory.class);
-		Connection connection = factory.getConnection();
-		if(connection!=null)
-		log.info("connection not null");
+//		ConnectionFactory factory = context.getBean(ConnectionFactory.class);
+//		Connection connection = factory.getConnection();
+//		if(connection!=null)
+//		log.info("connection not null");
 
 //		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("dao.xml" );
 //

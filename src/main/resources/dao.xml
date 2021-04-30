@@ -5,7 +5,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        https://www.springframework.org/schema/context/spring-context.xsd">
+        https://www.springframework.org/schema/context/spring-context.xsd"
+        default-init-method="init"
+       default-destroy-method="destroy"
+>
+
+    <context:annotation-config />
 
     <bean id="dao" class="kr.co.fastcampus.cli.Dao">
         <constructor-arg ref="connection"></constructor-arg>
@@ -28,5 +33,16 @@
         <constructor-arg name="password" value="" />
     </bean>
 
+    <bean class="kr.co.fastcampus.cli.A" />
+
+    <bean class="kr.co.fastcampus.cli.B">
+        <qualifier value="b1" />
+    </bean>
+
+    <bean class="kr.co.fastcampus.cli.B">
+        <qualifier value="b2" />
+    </bean>
+
+    <bean id="AppConfig" class="kr.co.fastcampus.cli.AppConfig"/>
 </beans>
 
