@@ -2,7 +2,6 @@ package kr.co.fastcampus.cli;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class B {
 //    /*의존성 추가가 되어 혼잡스러운 코드*/
 //    private boolean con = true;

@@ -15,22 +15,32 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @Slf4j
-@Configuration
-@ComponentScan(basePackageClasses = Main.class)
+
 //@ComponentScan.Filter(type= FilterType.ASSIGNABLE_TYPE, classes = B.class))
 //, excludeFilters = @ComponentScan.Filter(type= FilterType.REGEX, pattern = "kr.co.fastcampus.cli.B")
 class Main {
 	public static void main(String[] args) throws SQLException {
-
-//		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("dao.xml" );
-		ConfigurableApplicationContext an = new AnnotationConfigApplicationContext(Main.class);
-
-		B b = an.getBean(B.class);
+		
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		context.scan("kr.co.fastcampus.cli");
+		//context.register(AppConfig.class);
+		context.refresh();
+		B b = context.getBean(B.class);
 
 		log.info(""+b);
 
+		/*
+		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("dao.xml");
 
-		an.close();
+		Dao dao = context.getBean(Dao.class);
+
+		dao.run();
+
+
+		context.close();*/
+
+
+		context.close();
 //		C a2 = context.getBean("C", C.class);
 //		C a1 = context.getBean("C", C.class);
 //		log.info("result = " + (a1 == a2));

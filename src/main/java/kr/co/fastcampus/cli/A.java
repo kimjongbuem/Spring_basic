@@ -14,7 +14,10 @@ import javax.annotation.Resource;
 @Slf4j
 @Component
 public class A {
-   @Autowired
+    A(B b){
+        this.b = b;
+    }
+
 //    @Qualifier("b1")
    private B b; //@Inject
     //@Resource private B b;
@@ -32,4 +35,7 @@ public class A {
     public void Destroy(){
         log.info("postconstructor destroy");
     }
+
+
+
 }
