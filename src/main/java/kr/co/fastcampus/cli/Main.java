@@ -15,8 +15,10 @@ import java.sql.SQLException;
 class Main {
 	public static void main(String[] args) throws SQLException {
 
-		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("dao.xml" );
-		context.close();
+//		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("dao.xml" );
+		ConfigurableApplicationContext an = new AnnotationConfigApplicationContext("kr.co.fastcampus.cli" );
+
+		an.close();
 //		C a2 = context.getBean("C", C.class);
 //		C a1 = context.getBean("C", C.class);
 //		log.info("result = " + (a1 == a2));
