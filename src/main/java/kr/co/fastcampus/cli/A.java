@@ -14,9 +14,9 @@ import javax.annotation.Resource;
 @Slf4j
 @Component
 public class A {
-//    @Autowired
+   @Autowired
 //    @Qualifier("b1")
-//    private B b; //@Inject
+   private B b; //@Inject
     //@Resource private B b;
     @Value("${catalog.name}") String cName; // #{systemProperties['java.home']}
     //    @Autowired
