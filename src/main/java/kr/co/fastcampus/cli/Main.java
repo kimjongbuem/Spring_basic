@@ -20,26 +20,23 @@ import java.sql.SQLException;
 //, excludeFilters = @ComponentScan.Filter(type= FilterType.REGEX, pattern = "kr.co.fastcampus.cli.B")
 class Main {
 	public static void main(String[] args) throws SQLException {
-		
+
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.scan("kr.co.fastcampus.cli");
-		//context.register(AppConfig.class);
+//		context.scan("kr.co.fastcampus.cli");
+//		//context.register(AppConfig_dev.class);
+//		context.refresh();
+//		B b = context.getBean(B.class);
+
+//		log.info(""+b);
+
+
+	//	ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("dao.xml");
+
+		context.register(AppConfig.class);
 		context.refresh();
-		B b = context.getBean(B.class);
-
-		log.info(""+b);
-
-		/*
-		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("dao.xml");
-
 		Dao dao = context.getBean(Dao.class);
 
 		dao.run();
-
-
-		context.close();*/
-
-
 		context.close();
 //		C a2 = context.getBean("C", C.class);
 //		C a1 = context.getBean("C", C.class);

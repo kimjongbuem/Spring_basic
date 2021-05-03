@@ -32,7 +32,7 @@ public class A {
     }
 
     @PreDestroy
-    public void Destroy(){
+    public void destroy(){
         log.info("postconstructor destroy");
     }
 

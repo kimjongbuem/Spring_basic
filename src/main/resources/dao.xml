@@ -13,9 +13,9 @@
     <context:annotation-config />
 <!--    <context:component-scan base-package=""/>-->
     <context:property-placeholder location="classpath:application.properties"/>
-    <bean id="dao" class="kr.co.fastcampus.cli.Dao">
-        <constructor-arg ref="connection" />
-    </bean>
+<!--    <bean id="dao" class="kr.co.fastcampus.cli.Dao">-->
+<!--        <constructor-arg ref="connection" />-->
+<!--    </bean>-->
 <!--    <bean id="daoFactory" class="kr.co.fastcampus.cli.DaoFactory" />-->
 <!--    <bean id="A" class="kr.co.fastcampus.cli.A" >-->
 <!--        <constructor-arg ref="B"></constructor-arg>-->
@@ -25,14 +25,7 @@
 <!--        <constructor-arg value="true"></constructor-arg>-->
 <!--    </bean>-->
 
-    <bean id="connection" class="java.sql.Connection" factory-method="createConnection" factory-bean="connectionFactory" />
 
-    <bean id="connectionFactory" class="kr.co.fastcampus.cli.ConnectionFactory" init-method="init" destroy-method="destroy">
-        <constructor-arg name="driverName" value="${jdbc.driver-class}" />
-        <constructor-arg name="url" value="${jdbc.url}" />
-        <constructor-arg name="user" value="${jdbc.username}" />
-        <constructor-arg name="password" value="${jdbc.password}" />
-    </bean>
 
 <!--    <bean class="kr.co.fastcampus.cli.A" />-->
 
@@ -44,6 +37,28 @@
 <!--        <qualifier value="b2" />-->
 <!--    </bean>-->
 
-    <bean id="AppConfig" class="kr.co.fastcampus.cli.AppConfig"/>
+<!--    <bean id="connection" class="java.sql.Connection" factory-method="createConnection" factory-bean="connectionFactory" />-->
+
+<!--    <beans profile="default">-->
+
+<!--        <bean id="AppConfig_dev" class="kr.co.fastcampus.cli.AppConfig_dev_dev"/>-->
+<!--        <bean id="connectionFactory" class="kr.co.fastcampus.cli.ConnectionFactory" init-method="init" destroy-method="destroy">-->
+<!--            <constructor-arg name="driverName" value="${jdbc.driver-class}" />-->
+<!--            <constructor-arg name="url" value="${jdbc.url}" />-->
+<!--            <constructor-arg name="user" value="${jdbc.username}" />-->
+<!--            <constructor-arg name="password" value="${jdbc.password}" />-->
+<!--        </bean>-->
+<!--    </beans>-->
+
+<!--    <beans profile="dev">-->
+
+<!--        <bean id="AppConfig_dev" class="kr.co.fastcampus.cli.AppConfig_dev_dev"/>-->
+<!--        <bean id="connectionFactory" class="kr.co.fastcampus.cli.ConnectionFactory" init-method="init" destroy-method="destroy">-->
+<!--            <constructor-arg name="driverName" value="${jdbc.driver-class}" />-->
+<!--            <constructor-arg name="url" value="${jdbc.url.file}" />-->
+<!--            <constructor-arg name="user" value="${jdbc.username}" />-->
+<!--            <constructor-arg name="password" value="${jdbc.password}" />-->
+<!--        </bean>-->
+<!--    </beans>-->
 </beans>
 

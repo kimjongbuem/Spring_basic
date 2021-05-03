@@ -2,15 +2,18 @@ package kr.co.fastcampus.cli;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 @Slf4j
+@Component
 public class Dao {
 
-    private Connection connection;
+    private final Connection connection;
     public Dao(Connection connection){
         this.connection = connection;
     }
