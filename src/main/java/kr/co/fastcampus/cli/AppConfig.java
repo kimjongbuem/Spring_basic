@@ -10,14 +10,6 @@ import java.sql.Connection;
 @PropertySource("classpath:application-${spring.profiles.active}.properties")
 public class AppConfig {
     @Bean
-    public B b(){return new B();}
-
-    @Bean(initMethod = "init", destroyMethod = "destroy")
-    public A a(B b){
-        return new A(b);
-    }
-
-    @Bean
     public Connection connection(ConnectionFactory connectionFactory){
         return connectionFactory.getConnection();
     }
