@@ -20,14 +20,7 @@ public class Dao {
 
     public void insert() throws SQLException {
         var statement = connection.createStatement();
-        connection.setAutoCommit(false);
-
-        try {
-            statement.executeUpdate("insert into member(username, password) values('boojongmin', '1234')");
-            connection.commit();
-        } catch (SQLException e) {
-            connection.rollback();
-        }
+        statement.executeUpdate("insert into member(username, password) values('boojongmin', '1234')");
     }
 
     public void print() throws SQLException {

@@ -15,17 +15,20 @@ public class Transcation {
         this.connection = connection;
     }
 
-    public void aroundLog(ProceedingJoinPoint pjp) throws SQLException {
+    public Object aroundLog(ProceedingJoinPoint pjp) throws SQLException {
         log.info("before tran");
         var statement = connection.createStatement();
         connection.setAutoCommit(false);
         try{
             Object proceed = pjp.proceed();
-            log.info("returning..");
+            log.info("commit");
+            connection.commit();
         }catch(Throwable throwable){
-            log.info("throwable..");
+            log.info("rollback..");
         }
-        log.info("after....");
+        log.info("after tran");
+
+        return null;
     }
 
     public void beforeLog(){
