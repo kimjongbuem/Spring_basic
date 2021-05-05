@@ -1,5 +1,6 @@
 package kr.co.fastcampus.cli;
 
+import kr.co.fastcampus.cli.aop.Transcation;
 import kr.co.fastcampus.cli.service.MyService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 @Configuration
 @Profile("default | dev")
 @PropertySource("classpath:application-${spring.profiles.active}.properties")
+@EnableAspectJAutoProxy
 public class AppConfig {
     @Bean
     public Connection connection(ConnectionFactory connectionFactory){
@@ -40,6 +42,11 @@ public class AppConfig {
     public MyService myService(){
         return new MyService();
     }
+
+//    @Bean
+//    public Transcation transcation(Connection connection){
+//        return new Transcation(connection);
+//    }
 
 
 }

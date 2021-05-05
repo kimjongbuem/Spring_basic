@@ -2,19 +2,32 @@ package kr.co.fastcampus.cli.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 @Slf4j
+@Aspect
 public class Transcation {
 
-    private Connection connection;
+
+    private final Connection connection;
 
     public Transcation(Connection connection){
         this.connection = connection;
     }
+    @Pointcut("execution(* kr.co.fastcampus.cli.Dao.insert())")
+    public void transactionPointCut(){
 
+    }
+
+    @Around("transactionPointCut()")
     public Object aroundLog(ProceedingJoinPoint pjp) throws SQLException {
         log.info("before tran");
         var statement = connection.createStatement();
