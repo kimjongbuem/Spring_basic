@@ -10,28 +10,30 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="connectionFactory" class="kr.co.fastcampus.cli.ConnectionFactory">
-        <constructor-arg name="driverClass" value="org.h2.Driver" />
-        <constructor-arg name="url" value="jdbc:h2:file:~/test"/>
-        <constructor-arg name="user" value="sa"/>
-        <constructor-arg name="password" value=""/>
-    </bean>
-    <bean id="connection" class="java.sql.Connection"
-          factory-bean="connectionFactory"
-          factory-method="createConnection" />
+    <context:property-placeholder location="classpath:application.properties"/>
 
-    <bean id="aopDao" class="kr.co.fastcampus.cli.AopDao" init-method="init">
+    <bean id="aopbean" class="kr.co.fastcampus.cli.aop.Transcation"/>
+    <bean id="service" class="kr.co.fastcampus.cli.service.AopService"/>
+    <bean id="dao" class="kr.co.fastcampus.cli.Dao" >
         <constructor-arg ref="connection" />
     </bean>
 
-    <bean id="aopAspect" class="kr.co.fastcampus.cli.AopConfig" autowire="constructor"/>
+    <bean id="connection" class="java.sql.Connection" factory-method="createConnection" factory-bean="connectionFactory" />
 
+    <bean id="connectionFactory" class="kr.co.fastcampus.cli.ConnectionFactory">
+                <constructor-arg name="driverName" value="${jdbc.driver-class}" />
+                <constructor-arg name="url" value="${jdbc.url}" />
+                <constructor-arg name="user" value="${jdbc.username}" />
+                <constructor-arg name="password" value="${jdbc.password}" />
+    </bean>
     <aop:config>
-        <aop:aspect id="aopDaoAspect" ref="aopAspect">
-            <aop:pointcut id="aopDaoPointcut" expression="execution(* insert(..))"/>
-            <aop:around pointcut-ref="aopDaoPointcut" method="doAroundInsert"/>
-<!--            <aop:before pointcut-ref="aopDaoPointcut" method="doBeforeInsert"/>-->
-<!--            <aop:after-throwing pointcut-ref="aopDaoPointcut" throwing="ex" method="doAfterThrowingInsert"/>-->
+        <aop:aspect id="myAspect" ref="aopbean">
+            <aop:pointcut id="businessService" expression="execution(* kr.co.fastcampus.cli.service.AopService.*(..))"/>
+<!--            <aop:before pointcut-ref="businessService" method="beforeLog" />-->
+<!--            <aop:after pointcut-ref="businessService" method="afterLog" />-->
+<!--            <aop:after-returning pointcut-ref="businessService" method="afterReturning" />-->
+<!--            <aop:after-throwing pointcut-ref="businessService" method="afterThrowing" />-->
+                <aop:around pointcut-ref="businessService" method="aroundLog" />
         </aop:aspect>
     </aop:config>
 </beans>

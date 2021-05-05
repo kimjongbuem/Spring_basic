@@ -16,6 +16,7 @@ public class MyService {
     @Autowired
     private Validator validator;
 
+
     public void check(){
         PersonForm personForm = new PersonForm("fc", -1);
         Set<ConstraintViolation<PersonForm>> results = validator.validate(personForm);
