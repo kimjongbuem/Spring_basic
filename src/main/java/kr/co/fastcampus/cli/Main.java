@@ -1,20 +1,15 @@
 package kr.co.fastcampus.cli;
 
-import kr.co.fastcampus.cli.aop.Transcation;
-import kr.co.fastcampus.cli.service.MyService;
+import kr.co.fastcampus.cli.config.AppConfig;
+import kr.co.fastcampus.cli.controller.MemberController;
+import kr.co.fastcampus.cli.dao.MemberDao;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.Lifecycle;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.Resource;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 @Slf4j
 
@@ -26,14 +21,23 @@ class Main {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 
 		context.register(AppConfig.class);
-		context.register(Transcation.class);
 		context.refresh();
 
-		createTable(context.getBean(Connection.class));
-		Dao dao = context.getBean(Dao.class);
+		createTable(context.getBean(DataSource.class).getConnection());
+		MemberDao dao = context.getBean(MemberDao.class);
+		System.out.println("==============사용자의 username, password input ================");
 
-		dao.insert();
-		dao.print();
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("username : ");
+		String username = sc.nextLine();
+
+		System.out.println("password : ");
+		String password = sc.nextLine();
+
+		MemberController memberController = context.getBean(MemberController.class);
+		memberController.insert(username, password);
+		memberController.print();
 		context.close();
 
 	}

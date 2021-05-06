@@ -12,11 +12,11 @@
 
     <context:property-placeholder location="classpath:application.properties"/>
 
-    <bean id="aopbean" class="kr.co.fastcampus.cli.aop.Transcation">
+    <bean id="aopbean" class="kr.co.fastcampus.cli.Transcation">
         <constructor-arg ref="connection" />
     </bean>
-    <bean id="service" class="kr.co.fastcampus.cli.service.AopService"/>
-    <bean id="dao" class="kr.co.fastcampus.cli.Dao" >
+    <bean id="service" class="kr.co.fastcampus.cli.aop.AopService"/>
+    <bean id="dao" class="kr.co.fastcampus.cli.dao.MemberDao" >
         <constructor-arg ref="connection" />
     </bean>
 
@@ -30,7 +30,7 @@
     </bean>
     <aop:config>
         <aop:aspect id="myAspect" ref="aopbean">
-            <aop:pointcut id="businessService" expression="execution(* kr.co.fastcampus.cli.Dao.insert())"/>
+            <aop:pointcut id="businessService" expression="execution(* kr.co.fastcampus.cli.dao.MemberDao.insert())"/>
 <!--            <aop:before pointcut-ref="businessService" method="beforeLog" />-->
 <!--            <aop:after pointcut-ref="businessService" method="afterLog" />-->
 <!--            <aop:after-returning pointcut-ref="businessService" method="afterReturning" />-->
