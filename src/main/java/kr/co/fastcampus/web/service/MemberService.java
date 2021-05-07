@@ -1,14 +1,15 @@
 package kr.co.fastcampus.web.service;
 
 import kr.co.fastcampus.web.dao.MemberDao;
+import kr.co.fastcampus.web.entity.Member;
 import lombok.AllArgsConstructor;
 
-import java.sql.SQLException;
+import java.util.List;
 
 @AllArgsConstructor
 public class MemberService {
     private MemberDao memberDao;
-    public void insert(String username, String password) throws SQLException {
+    public void insert(String username, String password){
         //비지니스로직들//
         //비지니스로직들////비지니스로직들//
         //비지니스로직들//
@@ -18,7 +19,7 @@ public class MemberService {
         //비지니스로직들//
         //비지니스로직들//
     }
-    public void print() throws SQLException {
-        memberDao.print();
+    public List<Member> print(){
+        return memberDao.print();
     }
 }

@@ -1,16 +1,33 @@
 package kr.co.fastcampus.web.controller;
 
+import kr.co.fastcampus.web.entity.Member;
 import kr.co.fastcampus.web.service.MemberService;
+import lombok.val;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class MemberController {
+    @Autowired
     private MemberService memberService;
 
-    @RequestMapping("/hello")
-    public ResponseEntity<String> hello(){
-        return ResponseEntity.ok("hello world");
+    @RequestMapping("/index")
+    public ModelAndView index(){
+
+        ModelAndView modelAndView = new ModelAndView("index");
+        List<Member> list = memberService.print();
+        modelAndView.addObject("members" , list);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/create")
+    public void create(){
+        memberService.insert("username","password");
     }
 }

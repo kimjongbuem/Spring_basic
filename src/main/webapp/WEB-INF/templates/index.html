@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+
+    </head>
+    <body>
+        <ul th:each="member, iState : ${members}">
+            <li th:text="${member.username}">
+
+            </li>
+            <li th:text="${member.password}">  </li>
+        </ul>
+    </body>
+</html>
