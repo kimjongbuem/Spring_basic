@@ -13,7 +13,7 @@
     <context:annotation-config />
 <!--    <context:component-scan base-package=""/>-->
     <context:property-placeholder location="classpath:application.properties"/>
-<!--    <bean id="dao" class="kr.co.fastcampus.cli.dao.MemberDaoberDao">-->
+<!--    <bean id="dao" class="kr.co.fastcampus.web.dao.MemberDaoberDao">-->
 <!--        <constructor-arg ref="connection" />-->
 <!--    </bean>-->
 <!--    <bean id="daoFactory" class="kr.co.fastcampus.cli.DaoFactory" />-->

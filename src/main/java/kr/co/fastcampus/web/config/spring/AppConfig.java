@@ -1,10 +1,9 @@
-package kr.co.fastcampus.cli.config;
+package kr.co.fastcampus.web.config.spring;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import kr.co.fastcampus.cli.controller.MemberController;
-import kr.co.fastcampus.cli.dao.MemberDao;
-import kr.co.fastcampus.cli.service.MemberService;
+import kr.co.fastcampus.web.dao.MemberDao;
+import kr.co.fastcampus.web.service.MemberService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,7 +16,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @Profile("default | dev")
-@PropertySource("classpath:application-${spring.profiles.active}.properties")
+@PropertySource("classpath:application-default.properties")
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 public class AppConfig {
@@ -52,10 +51,10 @@ public class AppConfig {
         return new MemberService(dao);
     }
 
-    @Bean
-    public MemberController controller(MemberService memberService){
-        return new MemberController(memberService);
-    }
+//    @Bean
+//    public MemberController controller(MemberService memberService){
+//        return new MemberController(memberService);
+//    }
 
     @Bean
     PlatformTransactionManager platformTransactionManager(DataSource dataSource){

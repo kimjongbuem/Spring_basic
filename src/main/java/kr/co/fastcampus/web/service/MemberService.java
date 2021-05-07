@@ -1,6 +1,6 @@
-package kr.co.fastcampus.cli.service;
+package kr.co.fastcampus.web.service;
 
-import kr.co.fastcampus.cli.dao.MemberDao;
+import kr.co.fastcampus.web.dao.MemberDao;
 import lombok.AllArgsConstructor;
 
 import java.sql.SQLException;
