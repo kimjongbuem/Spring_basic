@@ -1,6 +1,8 @@
 package kr.co.fastcampus.web.controller;
 
+import kr.co.fastcampus.web.dao.MemberDao;
 import kr.co.fastcampus.web.entity.Member;
+import kr.co.fastcampus.web.model.MemberDto;
 import kr.co.fastcampus.web.service.MemberService;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,9 @@ public class MemberController {
     }
 
     @RequestMapping("/create")
-    public void create(){
-        memberService.insert("username","password");
+    public String create(MemberDto memberDto){
+        ModelAndView modelAndView = new ModelAndView("index");
+        memberService.insert(memberDto.getUsername(),memberDto.getPassword());
+        return "redirect:index";
     }
 }
